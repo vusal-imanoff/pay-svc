@@ -1,0 +1,44 @@
+databaseChangeLog:
+  - changeSet:
+      id: 06
+      author: ayxan
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: mergent_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: debt_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: amount
+                  type: money
+                  constraints:
+                    nullable: false
+              - column:
+                  name: account_code
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type:  varchar(255)
+                  constraints:
+                    nullable: false
+            tableName: payments
