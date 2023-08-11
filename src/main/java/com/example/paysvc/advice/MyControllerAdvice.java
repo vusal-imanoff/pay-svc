@@ -1,5 +1,6 @@
 package com.example.paysvc.advice;
 
+import com.example.paysvc.util.ResponseError;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -7,18 +8,23 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.util.NoSuchElementException;
 
-@ControllerAdvice
+@RestControllerAdvice
 public class MyControllerAdvice extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(NoSuchElementException.class)
-    public ResponseEntity<String> handleNoSuchElement(NoSuchElementException noSuchElementException)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public Object handleNoSuchElement(NoSuchElementException noSuchElementException)
     {
-        return new ResponseEntity<String>("Data is not found", HttpStatus.NOT_FOUND);
+        ResponseError responseError = new ResponseError();
+        responseError.setMessage("Data is not found");
+        return responseError.getMessage();
     }
 
     @Override

@@ -1,9 +1,10 @@
 package com.example.paysvc.repository;
 
-import com.example.paysvc.entity.Debt;
+import com.example.paysvc.dto.Response.DebtResponse;
+import com.example.paysvc.entity.DebtEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface DebtRepository extends JpaRepository<Debt, Long> {
+public interface DebtRepository extends JpaRepository<DebtEntity, Long> {
 
-    Debt findByAccountCode(int accountCode);
+    DebtResponse findByAccountCode(int accountCode);
 }

@@ -1,11 +1,12 @@
 package com.example.paysvc.service;
 
-import com.example.paysvc.entity.Payment;
+import com.example.paysvc.dto.Response.PaymentResponse;
+import com.example.paysvc.entity.PaymentEntity;
 
 import java.util.List;
 
 public interface PaymentService {
-    public Long save(Payment payment);
-    public Payment changeStatus(Long debtId);
-    public List<Payment> getAll();
+    Long save(PaymentEntity payment);
+    PaymentEntity changeStatus(Long debtId);
+    List<PaymentResponse> getAll();
 }

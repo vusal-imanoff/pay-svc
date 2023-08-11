@@ -1,16 +1,18 @@
 package com.example.paysvc.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @Entity
-@Table(name = "debt")
-public class Debt {
+@Table(name = "debts")
+public class DebtEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private int mergentId;  //merchant
+    private int merchantId;
     private double debt;
     private long userId;
     private long accountCode;

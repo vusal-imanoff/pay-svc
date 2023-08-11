@@ -1,6 +1,7 @@
 package com.example.paysvc.service.impl;
 
-import com.example.paysvc.entity.Debt;
+import com.example.paysvc.dto.Response.DebtResponse;
+import com.example.paysvc.entity.DebtEntity;
 import com.example.paysvc.repository.DebtRepository;
 import com.example.paysvc.service.DebtService;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +12,6 @@ import org.springframework.stereotype.Service;
 public class DebtServiceImpl implements DebtService {
     private final DebtRepository debtRepository;
     @Override
-    public Debt getDebtByAccountCode(int accountCode) {
-        return debtRepository.findByAccountCode(accountCode);
+    public DebtResponse getDebtByAccountCode(int accountCode) { return debtRepository.findByAccountCode(accountCode);
     }
 }

@@ -2,21 +2,24 @@ package com.example.paysvc.entity;
 
 import com.example.paysvc.enums.Status;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "payments")
-public class Payment {
+public class PaymentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private double amount;
     private int userId;
-    private int mergentId;
+    private int merchantId;
     private int debtId;
     private int accountCode;
 
     @Enumerated(EnumType.STRING)
     private Status status;
+
 }

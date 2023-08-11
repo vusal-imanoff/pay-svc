@@ -1,7 +1,7 @@
 databaseChangeLog:
   - changeSet:
-      id: 06
-      author: ayxan
+      id: 02
+      author: vusal
       changes:
         - createTable:
             columns:
@@ -12,7 +12,7 @@ databaseChangeLog:
                   constraints:
                     primaryKey: true
               - column:
-                  name: mergent_id
+                  name: merchant_id
                   type: int
                   constraints:
                     nullable: false
