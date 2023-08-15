@@ -10,6 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class DebtResponse {
+
     private Long id;
     private int merchantId;
     private double debt;

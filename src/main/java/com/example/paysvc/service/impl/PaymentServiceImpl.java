@@ -1,8 +1,10 @@
 package com.example.paysvc.service.impl;
 
+import com.example.paysvc.dto.Request.CreatePaymentRequest;
 import com.example.paysvc.dto.Response.PaymentResponse;
 import com.example.paysvc.entity.PaymentEntity;
 import com.example.paysvc.enums.Status;
+import com.example.paysvc.exception.NotFoundException;
 import com.example.paysvc.mapper.PaymentMapperImpl;
 import com.example.paysvc.repository.PaymentRepository;
 import com.example.paysvc.service.PaymentService;
@@ -16,22 +18,38 @@ import java.util.List;
 @RequiredArgsConstructor
 
 public class PaymentServiceImpl implements PaymentService {
+
     private final PaymentRepository paymentRepository;
     private final PaymentMapperImpl paymentMapper;
     @Override
-    public Long save(PaymentEntity payment) {
+    public Long save(CreatePaymentRequest request) {
 
-        payment.setStatus(Status.Pending);
-        paymentRepository.save(payment);
-        return payment.getId();
+        PaymentEntity pay = paymentMapper.dtoToModel(request);
+        pay.setStatus(Status.PENDING);
+        String idempotency="amount"+request.getAmount()+"userId"+request.getUserId()+"debtId"+request.getDebtId()
+                +"accountCode"+request.getAccountCode()+Status.PENDING;
+
+        PaymentResponse findPayment = paymentMapper.modelToDTO(paymentRepository.findByIdempotency(idempotency));
+
+        if (findPayment==null)
+        {
+            pay.setIdempotency(idempotency);
+            paymentRepository.save(pay);
+            return pay.getId();
+        }
+
+        return 0L;
     }
 
     @Override
-    public PaymentEntity changeStatus(Long id) {
+    public void changeStatus(Long id) {
         PaymentEntity payment = paymentRepository.findPaymentById(id);
-        payment.setStatus(Status.Accepted);
+        if (payment==null)
+        {
+            throw new NotFoundException("Payment is not found");
+        }
+        payment.setStatus(Status.ACCEPTED);
         paymentRepository.save(payment);
-        return payment;
     }
 
     @Override

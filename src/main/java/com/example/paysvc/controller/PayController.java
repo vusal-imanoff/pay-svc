@@ -1,5 +1,6 @@
 package com.example.paysvc.controller;
 
+import com.example.paysvc.dto.Request.CreatePaymentRequest;
 import com.example.paysvc.dto.Response.DebtResponse;
 import com.example.paysvc.dto.Response.PaymentResponse;
 import com.example.paysvc.entity.DebtEntity;
@@ -17,6 +18,7 @@ import java.util.*;
 @RequiredArgsConstructor
 @RequestMapping("pay")
 public class PayController {
+
     private final DebtServiceImpl debtService;
     private final PaymentServiceImpl paymentService;
 
@@ -27,18 +29,18 @@ public class PayController {
 
 
     @GetMapping("/{accountCode}")
-    public ResponseEntity<DebtResponse> getDebtByAccountCode(@PathVariable int accountCode) {
-        return new ResponseEntity<>(debtService.getDebtByAccountCode(accountCode), HttpStatus.OK);
+    public DebtResponse getDebtByAccountCode(@PathVariable int accountCode) {
+        return debtService.getDebtByAccountCode(accountCode);
     }
 
     @PostMapping
-    public Long paymentRequest(@RequestBody PaymentEntity payment) {
-        return paymentService.save(payment);
+    public Long paymentRequest(@RequestBody CreatePaymentRequest request) {
+        return paymentService.save(request);
     }
 
     @PostMapping("/{id}")
-    public ResponseEntity<PaymentEntity> paymentSubmit(@PathVariable Long id) {
-        return new ResponseEntity<>(paymentService.changeStatus(id),HttpStatus.OK);
+    public void paymentSubmit(@PathVariable Long id) {
+        paymentService.changeStatus(id);
     }
 }
 

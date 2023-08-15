@@ -10,6 +10,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "payments")
 public class PaymentEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,5 +22,7 @@ public class PaymentEntity {
 
     @Enumerated(EnumType.STRING)
     private Status status;
+
+    private String idempotency;
 
 }

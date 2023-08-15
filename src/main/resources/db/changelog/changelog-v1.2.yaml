@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: 10
+      author: vusal
+      changes:
+        - addColumn:
+            columns:
+              - column:
+                  name: idempotency
+                  type: varchar(250)
+            tableName: payments

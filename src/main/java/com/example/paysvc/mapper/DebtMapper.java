@@ -10,9 +10,7 @@ import java.util.List;
 
 @Mapper(componentModel  ="spring",unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface DebtMapper {
-    DebtMapper mapper = Mappers.getMapper(DebtMapper.class);
 
     DebtResponse modelToDTO(DebtEntity debtEntity);
-
     List<DebtResponse> modelsToDTOs(List<DebtEntity> debtEntities);
 }

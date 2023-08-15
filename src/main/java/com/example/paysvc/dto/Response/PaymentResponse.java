@@ -9,13 +9,14 @@ import lombok.Setter;
 @Getter
 @Setter
 public class PaymentResponse {
+
     private Long id;
     private double amount;
     private int userId;
     private int merchantId;
     private int debtId;
     private int accountCode;
-
+    private String idempotency;
     @Enumerated(EnumType.STRING)
     private Status status;
 }

@@ -9,10 +9,10 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CreatePaymentRequest {
+
     private double amount;
     private int userId;
     private int merchantId;
     private int debtId;
     private int accountCode;
-
 }

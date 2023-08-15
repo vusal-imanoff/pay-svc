@@ -9,6 +9,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "debts")
 public class DebtEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
