@@ -5,13 +5,12 @@ import com.example.paysvc.dto.Response.PaymentResponse;
 import com.example.paysvc.entity.PaymentEntity;
 import com.example.paysvc.enums.Status;
 import com.example.paysvc.exception.NotFoundException;
-import com.example.paysvc.mapper.PaymentMapperImpl;
+import com.example.paysvc.mapper.PaymentMapper;
 import com.example.paysvc.repository.PaymentRepository;
 import com.example.paysvc.service.PaymentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,19 +19,19 @@ import java.util.List;
 public class PaymentServiceImpl implements PaymentService {
 
     private final PaymentRepository paymentRepository;
-    private final PaymentMapperImpl paymentMapper;
+    private final PaymentMapper paymentMapper;
+
     @Override
     public Long save(CreatePaymentRequest request) {
 
         PaymentEntity pay = paymentMapper.dtoToModel(request);
         pay.setStatus(Status.PENDING);
-        String idempotency="amount"+request.getAmount()+"userId"+request.getUserId()+"debtId"+request.getDebtId()
-                +"accountCode"+request.getAccountCode()+Status.PENDING;
+        String idempotency = "amount" + request.getAmount() + "userId" + request.getUserId() + "debtId" + request.getDebtId()
+                + "accountCode" + request.getAccountCode() + Status.PENDING;
 
         PaymentResponse findPayment = paymentMapper.modelToDTO(paymentRepository.findByIdempotency(idempotency));
 
-        if (findPayment==null)
-        {
+        if (findPayment == null) {
             pay.setIdempotency(idempotency);
             paymentRepository.save(pay);
             return pay.getId();
@@ -44,8 +43,7 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     public void changeStatus(Long id) {
         PaymentEntity payment = paymentRepository.findPaymentById(id);
-        if (payment==null)
-        {
+        if (payment == null) {
             throw new NotFoundException("Payment is not found");
         }
         payment.setStatus(Status.ACCEPTED);

@@ -19,16 +19,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(NotFoundException.class)
     public Object handleNoSuchElement(NotFoundException notFoundException) {
-        ErrorResponse responseMessage = new ErrorResponse();
-        responseMessage.setMessage(notFoundException.getMessage());
-        return responseMessage;
+        return new ErrorResponse(notFoundException.getMessage());
     }
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(Exception.class)
     public Object handleInternalError(Exception e) {
-        ErrorResponse responseMessage = new ErrorResponse();
-        responseMessage.setMessage(e.getMessage());
-        return responseMessage;
+        return new ErrorResponse(e.getMessage());
     }
 }

@@ -23,7 +23,7 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: amount
-                  type: money
+                  type: NUMBER(6,2)
                   constraints:
                     nullable: false
               - column:
@@ -41,4 +41,7 @@ databaseChangeLog:
                   type:  varchar(255)
                   constraints:
                     nullable: false
-            tableName: payments
+              - column:
+                  name: idempotency
+                  type: varchar(250)
+            tableName: PAYMENTS

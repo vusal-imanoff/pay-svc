@@ -7,13 +7,15 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 @Getter
 @Setter
 public class DebtResponse {
 
     private Long id;
-    private int merchantId;
-    private double debt;
-    private long userId;
-    private long accountCode;
+    private Integer merchantId;
+    private BigDecimal debt;
+    private Long userId;
+    private Long accountCode;
 }

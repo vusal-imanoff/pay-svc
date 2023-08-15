@@ -5,20 +5,27 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 @Getter
 @Setter
 @Entity
-@Table(name = "payments")
+@Table(name = "PAYMENTS")
 public class PaymentEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private double amount;
-    private int userId;
-    private int merchantId;
-    private int debtId;
-    private int accountCode;
+
+    private BigDecimal amount;
+
+    private Integer userId;
+
+    private Integer merchantId;
+
+    private Integer debtId;
+
+    private Integer accountCode;
 
     @Enumerated(EnumType.STRING)
     private Status status;

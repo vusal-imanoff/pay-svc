@@ -6,13 +6,15 @@ import jakarta.persistence.Enumerated;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 @Getter
 @Setter
 public class CreatePaymentRequest {
 
-    private double amount;
-    private int userId;
-    private int merchantId;
-    private int debtId;
-    private int accountCode;
+    private BigDecimal amount;
+    private Integer userId;
+    private Integer merchantId;
+    private Integer debtId;
+    private Integer accountCode;
 }

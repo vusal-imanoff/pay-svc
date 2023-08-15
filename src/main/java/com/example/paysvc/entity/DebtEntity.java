@@ -4,18 +4,24 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 @Getter
 @Setter
 @Entity
-@Table(name = "debts")
+@Table(name = "DEBTS")
 public class DebtEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private int merchantId;
-    private double debt;
-    private long userId;
-    private long accountCode;
+
+    private Integer merchantId;
+
+    private BigDecimal debt;
+
+    private Long userId;
+
+    private Long accountCode;
 
 }
