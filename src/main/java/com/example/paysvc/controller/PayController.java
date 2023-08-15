@@ -16,7 +16,7 @@ import java.util.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("pay")
+@RequestMapping("v1/pay")
 public class PayController {
 
     private final DebtServiceImpl debtService;

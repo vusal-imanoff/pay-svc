@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface DebtRepository extends JpaRepository<DebtEntity, Long> {
 
-    DebtResponse findByAccountCode(long accountCode);
+    DebtResponse findByAccountCode(longgit a accountCode);
 }

@@ -1,15 +1,11 @@
 package com.example.paysvc.exception;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@RequiredArgsConstructor
 public class ErrorResponse {
 
-    private String message;
+    private final String message;
 }
