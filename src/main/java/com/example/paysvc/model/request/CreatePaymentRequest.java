@@ -1,8 +1,5 @@
-package com.example.paysvc.dto.Request;
+package com.example.paysvc.model.request;
 
-import com.example.paysvc.enums.Status;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import lombok.Getter;
 import lombok.Setter;
 

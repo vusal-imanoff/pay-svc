@@ -1,7 +1,7 @@
 package com.example.paysvc.service.impl;
 
-import com.example.paysvc.dto.Request.CreatePaymentRequest;
-import com.example.paysvc.dto.Response.PaymentResponse;
+import com.example.paysvc.model.request.CreatePaymentRequest;
+import com.example.paysvc.model.response.PaymentResponse;
 import com.example.paysvc.entity.PaymentEntity;
 import com.example.paysvc.enums.Status;
 import com.example.paysvc.exception.NotFoundException;
@@ -12,6 +12,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
+
+import static com.example.paysvc.enums.Status.ACCEPTED;
 
 @Service
 @RequiredArgsConstructor
@@ -24,30 +27,30 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     public Long save(CreatePaymentRequest request) {
 
-        PaymentEntity pay = paymentMapper.dtoToModel(request);
-        pay.setStatus(Status.PENDING);
-        String idempotency = "amount" + request.getAmount() + "userId" + request.getUserId() + "debtId" + request.getDebtId()
-                + "accountCode" + request.getAccountCode() + Status.PENDING;
+        AtomicReference<Long> id = new AtomicReference<>();
 
-        PaymentResponse findPayment = paymentMapper.modelToDTO(paymentRepository.findByIdempotency(idempotency));
+        String key = "amount" + request.getAmount() + "userId" + request.getUserId() + "debtId" + request.getDebtId() + "accountCode" + request.getAccountCode() + Status.PENDING;
 
-        if (findPayment == null) {
-            pay.setIdempotency(idempotency);
-            paymentRepository.save(pay);
-            return pay.getId();
-        }
+        paymentRepository.findByKey(key).ifPresentOrElse(entity -> {
+            throw new NotFoundException("Payment is exists");
+        }, () -> {
+            PaymentEntity pay = paymentMapper.dtoToModel(request);
+            pay.setStatus(Status.PENDING);
+            pay.setKey(key);
+            id.set(paymentRepository.save(pay).getId());
+        });
 
-        return 0L;
+        return id.get();
     }
 
     @Override
     public void changeStatus(Long id) {
-        PaymentEntity payment = paymentRepository.findPaymentById(id);
-        if (payment == null) {
-            throw new NotFoundException("Payment is not found");
-        }
-        payment.setStatus(Status.ACCEPTED);
-        paymentRepository.save(payment);
+
+        paymentRepository.findPaymentById(id).map(payment -> {
+            payment.setStatus(ACCEPTED);
+            paymentRepository.save(payment);
+            return payment;
+        }).orElseThrow(() -> new NotFoundException("Payment is not found"));
     }
 
     @Override

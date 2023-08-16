@@ -1,8 +1,8 @@
 package com.example.paysvc.service;
 
-import com.example.paysvc.dto.Response.DebtResponse;
+import com.example.paysvc.model.response.DebtResponse;
 
 public interface DebtService {
 
-    DebtResponse getDebtByAccountCode(int accountCode);
+    DebtResponse getDebtByAccountCode(Long accountCode);
 }

@@ -1,7 +1,7 @@
 package com.example.paysvc.mapper;
 
-import com.example.paysvc.dto.Request.CreatePaymentRequest;
-import com.example.paysvc.dto.Response.PaymentResponse;
+import com.example.paysvc.model.request.CreatePaymentRequest;
+import com.example.paysvc.model.response.PaymentResponse;
 import com.example.paysvc.entity.PaymentEntity;
 import org.mapstruct.Mapper;
 

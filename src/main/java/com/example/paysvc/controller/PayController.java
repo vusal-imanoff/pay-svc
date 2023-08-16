@@ -1,17 +1,11 @@
 package com.example.paysvc.controller;
 
-import com.example.paysvc.dto.Request.CreatePaymentRequest;
-import com.example.paysvc.dto.Response.DebtResponse;
-import com.example.paysvc.dto.Response.PaymentResponse;
-import com.example.paysvc.entity.DebtEntity;
-import com.example.paysvc.entity.PaymentEntity;
+import com.example.paysvc.model.request.CreatePaymentRequest;
+import com.example.paysvc.model.response.DebtResponse;
+import com.example.paysvc.model.response.PaymentResponse;
 import com.example.paysvc.service.DebtService;
 import com.example.paysvc.service.PaymentService;
-import com.example.paysvc.service.impl.DebtServiceImpl;
-import com.example.paysvc.service.impl.PaymentServiceImpl;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -31,7 +25,7 @@ public class PayController {
 
 
     @GetMapping("/{accountCode}")
-    public DebtResponse getDebtByAccountCode(@PathVariable int accountCode) {
+    public DebtResponse getDebtByAccountCode(@PathVariable Long accountCode) {
         return debtService.getDebtByAccountCode(accountCode);
     }
 

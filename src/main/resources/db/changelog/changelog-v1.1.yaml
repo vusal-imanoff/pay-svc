@@ -42,6 +42,6 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: idempotency
+                  name: key
                   type: varchar(250)
             tableName: PAYMENTS

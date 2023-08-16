@@ -1,4 +1,4 @@
-package com.example.paysvc.dto.Response;
+package com.example.paysvc.model.response;
 
 import com.example.paysvc.enums.Status;
 import jakarta.persistence.EnumType;
@@ -19,6 +19,5 @@ public class PaymentResponse {
     private Integer debtId;
     private Integer accountCode;
     private String idempotency;
-    @Enumerated(EnumType.STRING)
-    private Status status;
+    private Status key;
 }

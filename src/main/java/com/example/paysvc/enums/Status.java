@@ -1,5 +1,5 @@
 package com.example.paysvc.enums;
 
 public enum Status {
-    PENDING,CANCELLED,ACCEPTED
+    PENDING, CANCELLED, ACCEPTED
 }

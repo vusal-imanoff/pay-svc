@@ -30,6 +30,6 @@ public class PaymentEntity {
     @Enumerated(EnumType.STRING)
     private Status status;
 
-    private String idempotency;
+    private String key;
 
 }

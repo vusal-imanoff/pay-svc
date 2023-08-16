@@ -1,6 +1,6 @@
 package com.example.paysvc.mapper;
 
-import com.example.paysvc.dto.Response.DebtResponse;
+import com.example.paysvc.model.response.DebtResponse;
 import com.example.paysvc.entity.DebtEntity;
 import org.mapstruct.Mapper;
 
