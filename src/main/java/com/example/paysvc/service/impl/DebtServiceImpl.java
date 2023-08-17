@@ -9,6 +9,8 @@ import com.example.paysvc.service.DebtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import static com.example.paysvc.model.constant.ErrorMessages.debtNotFoundMessage;
+
 @Service
 @RequiredArgsConstructor
 public class DebtServiceImpl implements DebtService {
@@ -18,6 +20,7 @@ public class DebtServiceImpl implements DebtService {
 
     @Override
     public DebtResponse getDebtByAccountCode(Long accountCode) {
-        return debtRepository.findByAccountCode(accountCode).map(debtMapper::modelToDTO).orElseThrow(() -> new NotFoundException("Debt is not found"));
+        return debtRepository.findByAccountCode(accountCode).map(debtMapper::modelToDTO).orElseThrow(() ->
+                new NotFoundException(debtNotFoundMessage));
     }
 }

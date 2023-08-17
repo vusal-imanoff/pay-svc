@@ -31,12 +31,12 @@ public class PayController {
 
     @PostMapping
     public Long requestPayment(@RequestBody CreatePaymentRequest request) {
-        return paymentService.save(request);
+        return paymentService.requestPayment(request);
     }
 
     @PostMapping("/{id}")
     public void submitPayment(@PathVariable Long id) {
-        paymentService.changeStatus(id);
+        paymentService.submitPayment(id);
     }
 }
 

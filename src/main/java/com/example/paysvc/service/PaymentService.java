@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface PaymentService {
 
-    Long save(CreatePaymentRequest payment);
+    Long requestPayment(CreatePaymentRequest payment);
 
-    void changeStatus(Long debtId);
+    void submitPayment(Long debtId);
 
     List<PaymentResponse> getAll();
 }

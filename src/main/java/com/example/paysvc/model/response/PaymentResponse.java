@@ -18,6 +18,6 @@ public class PaymentResponse {
     private Integer merchantId;
     private Integer debtId;
     private Integer accountCode;
-    private String idempotency;
-    private Status key;
+    private String key;
+    private Status status;
 }
